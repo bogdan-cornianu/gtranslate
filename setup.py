@@ -21,5 +21,8 @@ setup(name='gtranslate',
       test_suite='nose.collector',
       tests_require=['nose'],
       entry_points={
-        'console_scripts': ['gtranslate=gtranslate.gtranslate:main'],
+        'console_scripts': [
+          'gtranslate=gtranslate.gtranslate:main',
+          'gtd=gtranslate.gtd:main'
+          ],
       })
