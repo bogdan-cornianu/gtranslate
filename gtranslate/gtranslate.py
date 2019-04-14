@@ -15,6 +15,7 @@ def main():
                         choices=('en', 'ro', 'it', 'de'))
     args = parser.parse_args()
     if args.file:
+        print("Translating, please wait...")
         conn = client.get_connection()
         client.send_message(args.file.readlines(), args.language, conn)
         client.read_message(conn)

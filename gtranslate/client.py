@@ -62,7 +62,6 @@ def read_message(unix_socket):
             pass
 
     translated = utils.deserialize(total_data)
-    print("Translating, please wait...")
     print(translated)
     logging.info('received {}'.format(translated))
 
