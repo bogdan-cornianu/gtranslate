@@ -2,6 +2,8 @@ import socket
 import logging
 import os
 
+from gtranslate import gapi
+
 
 def start_server():
     server_address = '/tmp/gtranslate_uds_socket'
@@ -18,6 +20,18 @@ def start_server():
     logging.info('listening...')
 
     return sock.accept()
+
+
+def read_message(connection):
+    while True:
+        data = connection.recv(4096)
+        logging.info('received {!r}'.format(data))
+        if data:
+            translations = gapi.get_translation(data)
+            send_message(connection, translations)
+            logging.info('sending data back to the client')
+        else:
+            break
 
 
 def send_message(connection, message):

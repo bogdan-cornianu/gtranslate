@@ -10,6 +10,7 @@ setup(name='gtranslate',
       packages=['gtranslate'],
       install_requires=[
           'python-daemon==2.2.3',
+          'googletrans==2.4.0'
       ],
       zip_safe=False,
       classifiers=[

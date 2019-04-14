@@ -1,9 +1,10 @@
 import os
 import sys
 import socket
-import json
 import logging
+import time
 
+from gtranslate import utils
 
 logging.basicConfig(filename='gtranslate_client.log', level=logging.DEBUG)
 
@@ -28,20 +29,44 @@ def send_message(message, unix_socket):
         logging.error('message or unix socket not specified.')
         return
     try:
-        message = json.dumps(message).encode('utf-8')
+        message = utils.serialize(message)
         logging.info('sending {!r}'.format(message))
         unix_socket.sendall(message)
 
-        amount_received = 0
-        amount_expected = len(message)
-
-        reply = b''
-        while amount_received < amount_expected:
-            data = unix_socket.recv(16)
-            reply += data
-            amount_received += len(data)
-        interm = json.loads(reply)
-        logging.info('received {}'.format(interm))
     finally:
         logging.info('closing socket')
-        unix_socket.close()
+        # unix_socket.close()
+
+
+def read_message(unix_socket):
+    unix_socket.setblocking(0)
+    timeout = 20
+    total_data = b''
+    data = ''
+    begin = time.time()
+    while True:
+        # if some data arrived, break after timeout
+        if total_data and time.time() - begin > timeout:
+            break
+        # increase waiting time if no data arrived
+        elif time.time() - begin > timeout * 2:
+            break
+        try:
+            data = unix_socket.recv(4096)
+            if data:
+                total_data += data
+                begin = time.time()
+            else:
+                time.sleep(0.1)
+        except:
+            pass
+
+    translated = utils.deserialize(total_data)
+    print("Translating, please wait...")
+    print(translated)
+    logging.info('received {}'.format(translated))
+
+
+def close_connection(connection):
+    logging.info('closing socket')
+    connection.close()
