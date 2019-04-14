@@ -24,12 +24,12 @@ def get_connection():
     return sock
 
 
-def send_message(message, unix_socket):
+def send_message(message, language, unix_socket):
     if not message or not unix_socket:
         logging.error('message or unix socket not specified.')
         return
     try:
-        message = utils.serialize(message)
+        message = utils.serialize({"message": message, "language": language})
         logging.info('sending {!r}'.format(message))
         unix_socket.sendall(message)
 

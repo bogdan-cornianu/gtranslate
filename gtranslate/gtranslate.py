@@ -16,7 +16,7 @@ def main():
     args = parser.parse_args()
     if args.file:
         conn = client.get_connection()
-        client.send_message(args.file.readlines(), conn)
+        client.send_message(args.file.readlines(), args.language, conn)
         client.read_message(conn)
         client.close_connection(conn)
     else:
