@@ -28,3 +28,7 @@ def start_server():
 def main():
     with daemon.DaemonContext(files_preserve=[file_logger.stream.fileno()]):
         start_server()
+
+
+if __name__ == '__main__':
+    main()

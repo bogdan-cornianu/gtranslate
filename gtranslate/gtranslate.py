@@ -22,3 +22,7 @@ def main():
         client.close_connection(conn)
     else:
         print("Please specify an input file.")
+
+
+if __name__ == '__main__':
+    main()
