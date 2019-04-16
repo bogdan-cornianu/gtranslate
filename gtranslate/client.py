@@ -56,9 +56,7 @@ def read_message(unix_socket):
         except:
             pass
 
-    translated = utils.deserialize(total_data)
-    print('\n'.join(translated))
-    logging.info('received {}'.format(translated))
+    return utils.deserialize(total_data)
 
 
 def close_connection(connection):

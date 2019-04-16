@@ -18,7 +18,8 @@ def main():
         print("Translating, please wait...")
         conn = client.get_connection()
         client.send_message(args.file.readlines(), args.language, conn)
-        client.read_message(conn)
+        translated = client.read_message(conn)
+        print('\n'.join(translated))
         client.close_connection(conn)
     else:
         print("Please specify an input file.")
