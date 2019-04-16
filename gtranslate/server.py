@@ -7,9 +7,7 @@ from gtranslate import gapi
 
 def start_server():
     server_address = '/tmp/gtranslate_uds_socket'
-    logging.info('starting server...')
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    logging.info('starting up on {}'.format(server_address))
     try:
         # delete socket file if it already exists
         if os.path.exists(server_address):

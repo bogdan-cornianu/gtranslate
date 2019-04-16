@@ -28,22 +28,17 @@ def send_message(message, language, unix_socket):
     if not message or not unix_socket:
         logging.error('message or unix socket not specified.')
         return
-    try:
-        message = utils.serialize({"message": message, "language": language})
-        logging.info('sending {!r}'.format(message))
-        unix_socket.sendall(message)
-
-    finally:
-        logging.info('closing socket')
-        # unix_socket.close()
+    message = utils.serialize({"message": message, "language": language})
+    logging.info('sending {!r}'.format(message))
+    unix_socket.sendall(message)
 
 
 def read_message(unix_socket):
     unix_socket.setblocking(0)
-    timeout = 20
+    timeout = 2
     total_data = b''
-    data = ''
     begin = time.time()
+
     while True:
         # if some data arrived, break after timeout
         if total_data and time.time() - begin > timeout:

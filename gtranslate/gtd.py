@@ -17,9 +17,8 @@ logger.setLevel(logging.INFO)
 
 def start_server():
     while True:
-        connection, client_address = server.start_server()
+        connection, _ = server.start_server()
         try:
-            logger.info('connection from {}'.format(client_address))
             server.read_message(connection)
         finally:
             connection.close()
