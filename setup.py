@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(name='gtranslate',
       version='0.1',
-      description='CLI for Google Translate',
+      description='Translate text from the command line',
       url='https://github.com/bogdan-cornianu/gtranslate',
       author='Bogdan Cornianu',
       author_email='bogdan@bogdancornianu.com',
