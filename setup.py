@@ -16,7 +16,7 @@ setup(name='gtranslate',
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GPLv3',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Text Processing :: Linguistic',
       ],
       test_suite='nose.collector',
