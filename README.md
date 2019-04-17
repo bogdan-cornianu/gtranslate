@@ -1,7 +1,8 @@
 # gtranslate
 
 ## Installation
-`sudo python3 setup.py develop`
+* clone the repo
+* `sudo python3 setup.py develop`
 
 ## Running the unit tests
 `sudo python3 setup.py test`
